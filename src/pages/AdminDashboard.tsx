@@ -54,7 +54,7 @@ const AdminDashboard = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate("/admin/login");
+    navigate("/x9k7m2/auth");
   };
 
   if (loading) {
