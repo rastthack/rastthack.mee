@@ -31,7 +31,7 @@ const AdminDashboard = () => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        navigate("/admin/login");
+        navigate("/x9k7m2/auth");
         return;
       }
       // Check admin role
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
       if (!roles || roles.length === 0) {
         toast({ title: "Access Denied", description: "You don't have admin privileges.", variant: "destructive" });
         await supabase.auth.signOut();
-        navigate("/admin/login");
+        navigate("/x9k7m2/auth");
         return;
       }
       setLoading(false);
