@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Shield, FolderOpen, FileText, Mail, Info, Wrench, LogOut } from "lucide-react";
+import { Shield, FolderOpen, FileText, Mail, Info, Wrench, Award, LogOut } from "lucide-react";
 import AdminProjects from "@/components/admin/AdminProjects";
 import AdminBlogPosts from "@/components/admin/AdminBlogPosts";
 import AdminMessages from "@/components/admin/AdminMessages";
 import AdminAbout from "@/components/admin/AdminAbout";
 import AdminSkills from "@/components/admin/AdminSkills";
+import AdminCertifications from "@/components/admin/AdminCertifications";
 
-type Tab = "projects" | "blog" | "messages" | "about" | "skills";
+type Tab = "projects" | "blog" | "messages" | "about" | "skills" | "certs";
 
 const tabs: { key: Tab; label: string; icon: typeof FolderOpen }[] = [
   { key: "projects", label: "Projects", icon: FolderOpen },
@@ -17,6 +18,7 @@ const tabs: { key: Tab; label: string; icon: typeof FolderOpen }[] = [
   { key: "messages", label: "Messages", icon: Mail },
   { key: "about", label: "About", icon: Info },
   { key: "skills", label: "Skills", icon: Wrench },
+  { key: "certs", label: "Certifications", icon: Award },
 ];
 
 const AdminDashboard = () => {
@@ -104,6 +106,7 @@ const AdminDashboard = () => {
         {activeTab === "messages" && <AdminMessages />}
         {activeTab === "about" && <AdminAbout />}
         {activeTab === "skills" && <AdminSkills />}
+        {activeTab === "certs" && <AdminCertifications />}
       </div>
     </div>
   );
