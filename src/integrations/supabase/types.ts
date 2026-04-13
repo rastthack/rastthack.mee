@@ -62,6 +62,39 @@ export type Database = {
         }
         Relationships: []
       }
+      certifications: {
+        Row: {
+          created_at: string
+          credential_url: string | null
+          date_obtained: string | null
+          id: string
+          image_url: string | null
+          issuer: string | null
+          sort_order: number | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          credential_url?: string | null
+          date_obtained?: string | null
+          id?: string
+          image_url?: string | null
+          issuer?: string | null
+          sort_order?: number | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          credential_url?: string | null
+          date_obtained?: string | null
+          id?: string
+          image_url?: string | null
+          issuer?: string | null
+          sort_order?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
