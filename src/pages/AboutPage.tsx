@@ -4,14 +4,17 @@ import SectionHeading from "@/components/SectionHeading";
 import GlowCard from "@/components/GlowCard";
 import { Shield, Globe, Search, Brain, Code, Lock, Award, ExternalLink } from "lucide-react";
 
-const defaultSkills = [
-  { icon: Shield, label: "Cybersecurity", desc: "Vulnerability assessment & defense strategies" },
-  { icon: Globe, label: "Web Pentesting", desc: "OWASP Top 10, API security testing" },
-  { icon: Search, label: "OSINT", desc: "Open-source intelligence gathering" },
-  { icon: Brain, label: "AI Security", desc: "Adversarial ML & AI system hardening" },
-  { icon: Code, label: "Exploit Development", desc: "Custom exploit research & PoC creation" },
-  { icon: Lock, label: "Network Security", desc: "Infrastructure & network penetration testing" },
-];
+const iconMap: Record<string, React.ElementType> = {
+  Shield, Globe, Search, Brain, Code, Lock,
+};
+
+interface Skill {
+  id: string;
+  label: string;
+  description: string | null;
+  icon: string | null;
+  sort_order: number | null;
+}
 
 interface Certification {
   id: string;
