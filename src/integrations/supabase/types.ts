@@ -122,6 +122,182 @@ export type Database = {
         }
         Relationships: []
       }
+      custom_section_items: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          link: string | null
+          section_id: string
+          sort_order: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          link?: string | null
+          section_id: string
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          link?: string | null
+          section_id?: string
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "custom_section_items_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "custom_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      custom_sections: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          slug: string
+          sort_order: number | null
+          title: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          slug: string
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          slug?: string
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      cv_resumes: {
+        Row: {
+          created_at: string
+          file_path: string | null
+          file_url: string
+          id: string
+          is_active: boolean
+          sort_order: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          file_path?: string | null
+          file_url: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          file_path?: string | null
+          file_url?: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      extracurricular: {
+        Row: {
+          created_at: string
+          date_text: string | null
+          description: string | null
+          id: string
+          organization: string | null
+          role: string | null
+          sort_order: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date_text?: string | null
+          description?: string | null
+          id?: string
+          organization?: string | null
+          role?: string | null
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date_text?: string | null
+          description?: string | null
+          id?: string
+          organization?: string | null
+          role?: string | null
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      papers: {
+        Row: {
+          abstract: string | null
+          created_at: string
+          id: string
+          link: string | null
+          sort_order: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          abstract?: string | null
+          created_at?: string
+          id?: string
+          link?: string | null
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          abstract?: string | null
+          created_at?: string
+          id?: string
+          link?: string | null
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           created_at: string
@@ -155,6 +331,24 @@ export type Database = {
           tech_stack?: string | null
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      section_visibility: {
+        Row: {
+          section_key: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          section_key: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          section_key?: string
+          updated_at?: string
+          visible?: boolean
         }
         Relationships: []
       }
