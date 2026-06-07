@@ -47,6 +47,24 @@ const AdminProjects = () => {
     toast({ title: "Project deleted" }); load();
   };
 
+  const move = async (index: number, dir: -1 | 1) => {
+    const target = index + dir;
+    if (target < 0 || target >= projects.length) return;
+    const a = projects[index], b = projects[target];
+    const ao = a.sort_order ?? index, bo = b.sort_order ?? target;
+    const newOrderA = ao === bo ? bo + dir : bo;
+    const newOrderB = ao === bo ? ao : ao;
+    const reordered = [...projects];
+    reordered[index] = { ...b, sort_order: newOrderB };
+    reordered[target] = { ...a, sort_order: newOrderA };
+    setProjects(reordered);
+    await Promise.all([
+      supabase.from("projects").update({ sort_order: newOrderA }).eq("id", a.id),
+      supabase.from("projects").update({ sort_order: newOrderB }).eq("id", b.id),
+    ]);
+    load();
+  };
+
   return (
     <div className="space-y-4">
       <button onClick={() => { setEditing(emptyProject); setIsNew(true); }} className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors">
