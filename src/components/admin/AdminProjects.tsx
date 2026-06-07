@@ -87,7 +87,7 @@ const AdminProjects = () => {
         </GlowCard>
       )}
 
-      {projects.map((p) => (
+      {projects.map((p, i) => (
         <GlowCard key={p.id}>
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -96,6 +96,8 @@ const AdminProjects = () => {
               {p.tech_stack && <p className="text-xs text-primary/60 mt-1">{p.tech_stack}</p>}
             </div>
             <div className="flex gap-1">
+              <button onClick={() => move(i, -1)} disabled={i === 0} className="p-1.5 text-dim hover:text-primary transition-colors disabled:opacity-30 disabled:hover:text-dim"><ArrowUp className="h-4 w-4" /></button>
+              <button onClick={() => move(i, 1)} disabled={i === projects.length - 1} className="p-1.5 text-dim hover:text-primary transition-colors disabled:opacity-30 disabled:hover:text-dim"><ArrowDown className="h-4 w-4" /></button>
               <button onClick={() => { setEditing(p); setIsNew(false); }} className="p-1.5 text-dim hover:text-primary transition-colors"><Pencil className="h-4 w-4" /></button>
               <button onClick={() => remove(p.id)} className="p-1.5 text-dim hover:text-destructive transition-colors"><Trash2 className="h-4 w-4" /></button>
             </div>
