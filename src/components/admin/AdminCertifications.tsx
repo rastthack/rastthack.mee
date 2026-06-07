@@ -46,6 +46,24 @@ const AdminCertifications = () => {
     toast({ title: "Certification deleted" }); load();
   };
 
+  const move = async (index: number, dir: -1 | 1) => {
+    const target = index + dir;
+    if (target < 0 || target >= items.length) return;
+    const a = items[index], b = items[target];
+    const ao = a.sort_order ?? index, bo = b.sort_order ?? target;
+    const newOrderA = ao === bo ? bo + dir : bo;
+    const newOrderB = ao === bo ? ao : ao;
+    const reordered = [...items];
+    reordered[index] = { ...b, sort_order: newOrderB };
+    reordered[target] = { ...a, sort_order: newOrderA };
+    setItems(reordered);
+    await Promise.all([
+      supabase.from("certifications").update({ sort_order: newOrderA }).eq("id", a.id),
+      supabase.from("certifications").update({ sort_order: newOrderB }).eq("id", b.id),
+    ]);
+    load();
+  };
+
   return (
     <div className="space-y-4">
       <button onClick={() => { setEditing(empty); setIsNew(true); }} className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors">
