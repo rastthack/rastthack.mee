@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import GlowCard from "@/components/GlowCard";
-import { Plus, Trash2, Save, X, Pencil } from "lucide-react";
+import { Plus, Trash2, Save, X, Pencil, ArrowUp, ArrowDown } from "lucide-react";
 
 interface Certification {
   id: string;
