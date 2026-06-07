@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import GlowCard from "@/components/GlowCard";
-import { Plus, Pencil, Trash2, Save, X } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, X, ArrowUp, ArrowDown } from "lucide-react";
 
 interface Project {
   id: string;
@@ -47,6 +47,24 @@ const AdminProjects = () => {
     toast({ title: "Project deleted" }); load();
   };
 
+  const move = async (index: number, dir: -1 | 1) => {
+    const target = index + dir;
+    if (target < 0 || target >= projects.length) return;
+    const a = projects[index], b = projects[target];
+    const ao = a.sort_order ?? index, bo = b.sort_order ?? target;
+    const newOrderA = ao === bo ? bo + dir : bo;
+    const newOrderB = ao === bo ? ao : ao;
+    const reordered = [...projects];
+    reordered[index] = { ...b, sort_order: newOrderB };
+    reordered[target] = { ...a, sort_order: newOrderA };
+    setProjects(reordered);
+    await Promise.all([
+      supabase.from("projects").update({ sort_order: newOrderA }).eq("id", a.id),
+      supabase.from("projects").update({ sort_order: newOrderB }).eq("id", b.id),
+    ]);
+    load();
+  };
+
   return (
     <div className="space-y-4">
       <button onClick={() => { setEditing(emptyProject); setIsNew(true); }} className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors">
@@ -69,7 +87,7 @@ const AdminProjects = () => {
         </GlowCard>
       )}
 
-      {projects.map((p) => (
+      {projects.map((p, i) => (
         <GlowCard key={p.id}>
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -78,6 +96,8 @@ const AdminProjects = () => {
               {p.tech_stack && <p className="text-xs text-primary/60 mt-1">{p.tech_stack}</p>}
             </div>
             <div className="flex gap-1">
+              <button onClick={() => move(i, -1)} disabled={i === 0} className="p-1.5 text-dim hover:text-primary transition-colors disabled:opacity-30 disabled:hover:text-dim"><ArrowUp className="h-4 w-4" /></button>
+              <button onClick={() => move(i, 1)} disabled={i === projects.length - 1} className="p-1.5 text-dim hover:text-primary transition-colors disabled:opacity-30 disabled:hover:text-dim"><ArrowDown className="h-4 w-4" /></button>
               <button onClick={() => { setEditing(p); setIsNew(false); }} className="p-1.5 text-dim hover:text-primary transition-colors"><Pencil className="h-4 w-4" /></button>
               <button onClick={() => remove(p.id)} className="p-1.5 text-dim hover:text-destructive transition-colors"><Trash2 className="h-4 w-4" /></button>
             </div>
