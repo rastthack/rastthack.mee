@@ -113,76 +113,89 @@ const AboutPage = () => {
           </div>
         )}
 
-        {show("extracurricular") && extras.length > 0 && (
+        {show("extracurricular") && (
           <>
             <SectionHeading title="Extracurricular" subtitle="Activities, communities, and contributions" />
-            <div className="space-y-4 mb-16">
-              {extras.map((e) => (
-                <GlowCard key={e.id}>
-                  <div className="flex items-start gap-3">
-                    <Users className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div className="min-w-0">
-                      <h3 className="text-primary font-semibold">{e.title}</h3>
-                      <p className="text-dim text-xs">{[e.role, e.organization].filter(Boolean).join(" • ")}</p>
-                      {e.date_text && <p className="text-primary/60 text-xs">{e.date_text}</p>}
-                      {e.description && <p className="text-dim text-sm mt-2 whitespace-pre-wrap">{e.description}</p>}
-                    </div>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
-          </>
-        )}
-
-        {show("cv") && cvs.length > 0 && (
-          <>
-            <SectionHeading title="CV / Resume" subtitle="View or download my current resume" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
-              {cvs.map((cv) => (
-                <GlowCard key={cv.id}>
-                  <div className="flex items-center gap-3">
-                    <FileDown className="h-8 w-8 text-primary flex-shrink-0" />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-primary font-semibold truncate">{cv.title}</h3>
-                      <div className="flex gap-3 mt-2">
-                        <a href={cv.file_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent">
-                          View <ExternalLink className="h-3 w-3" />
-                        </a>
-                        <a href={cv.file_url} download className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent">
-                          Download <FileDown className="h-3 w-3" />
-                        </a>
+            {extras.length === 0 ? (
+              <p className="text-dim text-center text-sm mb-16">No activities added yet.</p>
+            ) : (
+              <div className="space-y-4 mb-16">
+                {extras.map((e) => (
+                  <GlowCard key={e.id}>
+                    <div className="flex items-start gap-3">
+                      <Users className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <div className="min-w-0">
+                        <h3 className="text-primary font-semibold">{e.title}</h3>
+                        <p className="text-dim text-xs">{[e.role, e.organization].filter(Boolean).join(" • ")}</p>
+                        {e.date_text && <p className="text-primary/60 text-xs">{e.date_text}</p>}
+                        {e.description && <p className="text-dim text-sm mt-2 whitespace-pre-wrap">{e.description}</p>}
                       </div>
                     </div>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
+                  </GlowCard>
+                ))}
+              </div>
+            )}
           </>
         )}
 
-        {show("papers") && papers.length > 0 && (
+        {show("cv") && (
           <>
-            <SectionHeading title="Papers & Research" subtitle="Published work and research contributions" />
-            <div className="space-y-4 mb-16">
-              {papers.map((p) => (
-                <GlowCard key={p.id}>
-                  <div className="flex items-start gap-3">
-                    <BookOpen className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-primary font-semibold">{p.title}</h3>
-                      {p.abstract && <p className="text-dim text-sm mt-2 whitespace-pre-wrap">{p.abstract}</p>}
-                      {p.link && (
-                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent mt-2">
-                          Read paper <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
+            <SectionHeading title="CV / Resume" subtitle="View or download my current resume" />
+            {cvs.length === 0 ? (
+              <p className="text-dim text-center text-sm mb-16">No CV uploaded yet.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
+                {cvs.map((cv) => (
+                  <GlowCard key={cv.id}>
+                    <div className="flex items-center gap-3">
+                      <FileDown className="h-8 w-8 text-primary flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-primary font-semibold truncate">{cv.title}</h3>
+                        <div className="flex gap-3 mt-2">
+                          <a href={cv.file_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent">
+                            View <ExternalLink className="h-3 w-3" />
+                          </a>
+                          <a href={cv.file_url} download className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent">
+                            Download <FileDown className="h-3 w-3" />
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
+                  </GlowCard>
+                ))}
+              </div>
+            )}
           </>
         )}
+
+        {show("papers") && (
+          <>
+            <SectionHeading title="Papers & Research" subtitle="Published work and research contributions" />
+            {papers.length === 0 ? (
+              <p className="text-dim text-center text-sm mb-16">No papers added yet.</p>
+            ) : (
+              <div className="space-y-4 mb-16">
+                {papers.map((p) => (
+                  <GlowCard key={p.id}>
+                    <div className="flex items-start gap-3">
+                      <BookOpen className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-primary font-semibold">{p.title}</h3>
+                        {p.abstract && <p className="text-dim text-sm mt-2 whitespace-pre-wrap">{p.abstract}</p>}
+                        {p.link && (
+                          <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:text-accent mt-2">
+                            Read paper <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </GlowCard>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
 
         {customSections.map((s) => {
           const itemsForSection = customItems.filter((i) => i.section_id === s.id);
