@@ -8,6 +8,10 @@ import Footer from "@/components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import SkillsPage from "./pages/SkillsPage";
+import CertificationsPage from "./pages/CertificationsPage";
+import ExtracurricularPage from "./pages/ExtracurricularPage";
+import PapersPage from "./pages/PapersPage";
 import BlogPage from "./pages/BlogPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
@@ -34,6 +38,10 @@ const App = () => (
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/certifications" element={<CertificationsPage />} />
+          <Route path="/extracurricular" element={<ExtracurricularPage />} />
+          <Route path="/papers" element={<PapersPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/x9k7m2/auth" element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />

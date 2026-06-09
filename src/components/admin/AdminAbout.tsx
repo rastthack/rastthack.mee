@@ -18,10 +18,25 @@ const AdminAbout = () => {
   }, []);
 
   const save = async () => {
+    const { data: session } = await supabase.auth.getSession();
+    if (!session.session) {
+      toast({ title: "Not signed in", description: "Please sign in again.", variant: "destructive" });
+      return;
+    }
     if (id) {
-      await supabase.from("about_info").update({ bio }).eq("id", id);
+      const { data, error } = await supabase
+        .from("about_info")
+        .update({ bio, updated_at: new Date().toISOString() })
+        .eq("id", id)
+        .select();
+      if (error) { toast({ title: "Save failed", description: error.message, variant: "destructive" }); return; }
+      if (!data || data.length === 0) {
+        toast({ title: "Save failed", description: "No rows updated. Check admin permissions.", variant: "destructive" });
+        return;
+      }
     } else {
-      const { data } = await supabase.from("about_info").insert({ bio }).select().single();
+      const { data, error } = await supabase.from("about_info").insert({ bio }).select().single();
+      if (error) { toast({ title: "Save failed", description: error.message, variant: "destructive" }); return; }
       if (data) setId(data.id);
     }
     toast({ title: "About info updated" });
