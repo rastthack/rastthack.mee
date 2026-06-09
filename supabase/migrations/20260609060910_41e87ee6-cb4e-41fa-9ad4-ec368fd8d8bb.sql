@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS "Public can read cv-files" ON storage.objects;
+CREATE POLICY "Admins read cv-files" ON storage.objects FOR SELECT USING (bucket_id = 'cv-files' AND has_role(auth.uid(), 'admin'::app_role));
