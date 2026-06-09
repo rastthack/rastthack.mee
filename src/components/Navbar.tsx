@@ -5,7 +5,11 @@ import { Menu, X, Shield } from "lucide-react";
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/skills", label: "Skills" },
   { to: "/projects", label: "Projects" },
+  { to: "/certifications", label: "Certifications" },
+  { to: "/extracurricular", label: "Extracurricular" },
+  { to: "/papers", label: "Papers" },
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
