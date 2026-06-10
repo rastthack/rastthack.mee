@@ -16,18 +16,60 @@ export type Database = {
     Tables: {
       about_info: {
         Row: {
+          avatar_url: string | null
           bio: string | null
           id: string
           updated_at: string
         }
         Insert: {
+          avatar_url?: string | null
           bio?: string | null
           id?: string
           updated_at?: string
         }
         Update: {
+          avatar_url?: string | null
           bio?: string | null
           id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      achievements: {
+        Row: {
+          category: string
+          created_at: string
+          date: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          link: string | null
+          sort_order: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link?: string | null
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link?: string | null
+          sort_order?: number | null
+          title?: string
           updated_at?: string
         }
         Relationships: []
