@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Terminal, Eye } from "lucide-react";
+import { ArrowRight, Terminal, Eye, User } from "lucide-react";
 import TypingText from "@/components/TypingText";
 import MatrixRain from "@/components/MatrixRain";
 
@@ -50,8 +50,15 @@ const HomePage = () => {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "3.5s" }}>
             <Link
-              to="/projects"
+              to="/about"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded font-semibold tracking-wide hover:bg-accent transition-colors glow-border"
+            >
+              <User className="h-4 w-4" />
+              About Me
+            </Link>
+            <Link
+              to="/projects"
+              className="inline-flex items-center justify-center gap-2 border border-primary/30 text-primary px-6 py-3 rounded font-semibold tracking-wide hover:bg-primary/10 transition-colors"
             >
               <Eye className="h-4 w-4" />
               View Projects
