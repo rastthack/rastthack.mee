@@ -64,8 +64,25 @@ const AboutPage = () => {
             {avatarUrl && (
               <img src={avatarUrl} alt="Profile" className="w-32 h-32 rounded-full object-cover border-2 border-primary/40 flex-shrink-0 glow-border" loading="lazy" />
             )}
-            <div className="space-y-4 text-dim leading-relaxed whitespace-pre-wrap flex-1">
-              {bio ? <p>{bio}</p> : <p className="animate-glow-pulse">Loading...</p>}
+            <div className="flex-1 space-y-4">
+              <div className="space-y-4 text-dim leading-relaxed whitespace-pre-wrap">
+                {bio ? <p>{bio}</p> : <p className="animate-glow-pulse">Loading...</p>}
+              </div>
+              {socials.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {socials.map((s) => {
+                    const Icon = SOCIAL_ICONS[s.platform] || Globe;
+                    return (
+                      <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-primary/30 text-xs text-primary hover:bg-primary/10 hover:border-primary transition-colors"
+                        title={s.platform}>
+                        <Icon className="h-3.5 w-3.5" />
+                        {s.platform}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </GlowCard>
