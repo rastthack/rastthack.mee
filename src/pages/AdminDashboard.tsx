@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Shield, FolderOpen, FileText, Mail, Info, Wrench, Award, LogOut, Users, BookOpen, FileDown, Layers, ToggleLeft, Trophy } from "lucide-react";
+import { Shield, FolderOpen, FileText, Mail, Info, Wrench, Award, LogOut, Users, BookOpen, FileDown, Layers, ToggleLeft, Trophy, Share2 } from "lucide-react";
 import AdminProjects from "@/components/admin/AdminProjects";
 import AdminBlogPosts from "@/components/admin/AdminBlogPosts";
 import AdminMessages from "@/components/admin/AdminMessages";
@@ -15,8 +15,9 @@ import AdminPapers from "@/components/admin/AdminPapers";
 import AdminCustomSections from "@/components/admin/AdminCustomSections";
 import AdminVisibility from "@/components/admin/AdminVisibility";
 import AdminAchievements from "@/components/admin/AdminAchievements";
+import AdminSocialLinks from "@/components/admin/AdminSocialLinks";
 
-type Tab = "projects" | "blog" | "messages" | "about" | "achievements" | "skills" | "certs" | "extra" | "cv" | "papers" | "custom" | "visibility";
+type Tab = "projects" | "blog" | "messages" | "about" | "achievements" | "social" | "skills" | "certs" | "extra" | "cv" | "papers" | "custom" | "visibility";
 
 const tabs: { key: Tab; label: string; icon: typeof FolderOpen }[] = [
   { key: "projects", label: "Projects", icon: FolderOpen },
@@ -24,6 +25,7 @@ const tabs: { key: Tab; label: string; icon: typeof FolderOpen }[] = [
   { key: "messages", label: "Messages", icon: Mail },
   { key: "about", label: "About", icon: Info },
   { key: "achievements", label: "Achievements", icon: Trophy },
+  { key: "social", label: "Social Links", icon: Share2 },
   { key: "skills", label: "Skills", icon: Wrench },
   { key: "certs", label: "Certifications", icon: Award },
   { key: "extra", label: "Extracurricular", icon: Users },
@@ -118,6 +120,7 @@ const AdminDashboard = () => {
         {activeTab === "messages" && <AdminMessages />}
         {activeTab === "about" && <AdminAbout />}
         {activeTab === "achievements" && <AdminAchievements />}
+        {activeTab === "social" && <AdminSocialLinks />}
         {activeTab === "skills" && <AdminSkills />}
         {activeTab === "certs" && <AdminCertifications />}
         {activeTab === "extra" && <AdminExtracurricular />}
