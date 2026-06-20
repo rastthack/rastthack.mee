@@ -40,7 +40,7 @@ const HomePage = () => {
               RASTTHACK
             </h1>
             <p className="text-dim text-lg">
-              Ethical Hacker &bull; Penetration Tester &bull; Security Researcher
+              Ethical Hacker &bull; Penetration Tester &bull; Security Researcher &bull; AI/LLM Security Engineer
             </p>
             <p className="text-sm text-dim italic">
               "Breaking systems to secure them."
