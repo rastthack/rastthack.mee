@@ -2,37 +2,47 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import SectionHeading from "@/components/SectionHeading";
 import GlowCard from "@/components/GlowCard";
-import { FileDown, ExternalLink, FileText } from "lucide-react";
+import { FileDown, ExternalLink, FileText, Github, Linkedin, Twitter, Facebook, Youtube, Instagram, Mail, Globe, MessageCircle, Send } from "lucide-react";
 
 interface CV { id: string; title: string; file_url: string; }
 interface CustomSection { id: string; title: string; slug: string; description: string | null; sort_order: number | null; }
 interface CustomItem { id: string; section_id: string; title: string; content: string | null; image_url: string | null; link: string | null; }
 interface Achievement { id: string; category: string; title: string; description: string | null; date: string | null; link: string | null; image_url: string | null; sort_order: number | null; }
+interface SocialLink { id: string; platform: string; url: string; visible: boolean; sort_order: number; }
+
+const SOCIAL_ICONS: Record<string, typeof Github> = {
+  GitHub: Github, LinkedIn: Linkedin, X: Twitter, Twitter: Twitter, Facebook: Facebook,
+  Reddit: MessageCircle, Instagram: Instagram, YouTube: Youtube, Mastodon: MessageCircle,
+  Discord: MessageCircle, Telegram: Send, Email: Mail, Website: Globe, Other: Globe,
+};
 
 const AboutPage = () => {
   const [bio, setBio] = useState<string | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [cvs, setCvs] = useState<CV[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [socials, setSocials] = useState<SocialLink[]>([]);
   const [customSections, setCustomSections] = useState<CustomSection[]>([]);
   const [customItems, setCustomItems] = useState<CustomItem[]>([]);
   const [visibility, setVisibility] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const load = async () => {
-      const [aboutRes, cvRes, csRes, ciRes, visRes, achRes] = await Promise.all([
+      const [aboutRes, cvRes, csRes, ciRes, visRes, achRes, socRes] = await Promise.all([
         supabase.from("about_info").select("*").limit(1).maybeSingle(),
         supabase.from("cv_resumes").select("*").eq("is_active", true).order("sort_order"),
         supabase.from("custom_sections").select("*").eq("visible", true).order("sort_order"),
         supabase.from("custom_section_items").select("*").order("sort_order"),
         supabase.from("section_visibility").select("*"),
         supabase.from("achievements").select("*").order("category").order("sort_order"),
+        (supabase as any).from("social_links").select("*").eq("visible", true).order("sort_order"),
       ]);
       if (aboutRes.data) { setBio(aboutRes.data.bio); setAvatarUrl(aboutRes.data.avatar_url); }
       if (cvRes.data) setCvs(cvRes.data);
       if (csRes.data) setCustomSections(csRes.data);
       if (ciRes.data) setCustomItems(ciRes.data);
       if (achRes.data) setAchievements(achRes.data);
+      if (socRes.data) setSocials(socRes.data as SocialLink[]);
       if (visRes.data) {
         const map: Record<string, boolean> = {};
         visRes.data.forEach((r: { section_key: string; visible: boolean }) => { map[r.section_key] = r.visible; });
