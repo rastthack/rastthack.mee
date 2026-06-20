@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can view custom items" ON public.custom_section_items;
