@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import SectionHeading from "@/components/SectionHeading";
 import GlowCard from "@/components/GlowCard";
-import { FileDown, ExternalLink, FileText, Github, Linkedin, Twitter, Facebook, Youtube, Instagram, Mail, Globe, MessageCircle, Send } from "lucide-react";
+import TypingText from "@/components/TypingText";
+import MatrixRain from "@/components/MatrixRain";
+import { FileDown, ExternalLink, FileText, Github, Linkedin, Twitter, Facebook, Youtube, Instagram, Mail, Globe, MessageCircle, Send, ArrowRight, Terminal, Eye, User } from "lucide-react";
 
 interface CV { id: string; title: string; file_url: string; }
 interface CustomSection { id: string; title: string; slug: string; description: string | null; sort_order: number | null; }
