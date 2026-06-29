@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import SectionHeading from "@/components/SectionHeading";
 import GlowCard from "@/components/GlowCard";
-import TypingText from "@/components/TypingText";
-import MatrixRain from "@/components/MatrixRain";
-import { FileDown, ExternalLink, FileText, Github, Linkedin, Twitter, Facebook, Youtube, Instagram, Mail, Globe, MessageCircle, Send, ArrowRight, Terminal, Eye, User } from "lucide-react";
+import { FileDown, ExternalLink, FileText, Github, Linkedin, Twitter, Facebook, Youtube, Instagram, Mail, Globe, MessageCircle, Send } from "lucide-react";
 
 interface CV { id: string; title: string; file_url: string; }
 interface CustomSection { id: string; title: string; slug: string; description: string | null; sort_order: number | null; }
@@ -58,79 +56,10 @@ const AboutPage = () => {
   const show = (key: string) => visibility[key] ?? true;
 
   return (
-    <div className="min-h-screen">
-      {/* Previous Home / Terminal hero */}
-      <div className="relative min-h-screen flex items-center justify-center -mt-16">
-        <MatrixRain />
-        <div className="scanline fixed inset-0 pointer-events-none z-[1]" />
+    <div className="min-h-screen pt-24 pb-16">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <SectionHeading title="About Me" subtitle="Security researcher dedicated to making the digital world safer" />
 
-        <div className="relative z-10 container mx-auto px-4 py-20">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="bg-terminal border border-primary/20 rounded-lg overflow-hidden glow-border mx-auto max-w-2xl">
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-primary/10 bg-primary/5">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-accent/40" />
-                <div className="w-3 h-3 rounded-full bg-primary/40" />
-                <span className="text-xs text-dim ml-2">rastthack@terminal</span>
-              </div>
-              <div className="p-6 text-left">
-                <TypingText
-                  lines={[
-                    "Initializing RASTTHACK...",
-                    "Loading security modules...",
-                    "Access Granted.",
-                    "Welcome, Raduan Ahamed.",
-                  ]}
-                  typingSpeed={40}
-                  lineDelay={600}
-                  className="text-sm md:text-base leading-relaxed"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-4 animate-fade-in" style={{ animationDelay: "3s" }}>
-              <h1 className="text-4xl md:text-6xl font-bold tracking-wider glow-text">
-                RASTTHACK
-              </h1>
-              <p className="text-dim text-lg">
-                Ethical Hacker &bull; Penetration Tester &bull; Security Researcher &bull; AI/LLM Security Engineer
-              </p>
-              <p className="text-sm text-dim italic">
-                "Breaking systems to secure them."
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "3.5s" }}>
-              <Link
-                to="#about"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded font-semibold tracking-wide hover:bg-accent transition-colors glow-border"
-              >
-                <User className="h-4 w-4" />
-                About Me
-              </Link>
-              <Link
-                to="/projects"
-                className="inline-flex items-center justify-center gap-2 border border-primary/30 text-primary px-6 py-3 rounded font-semibold tracking-wide hover:bg-primary/10 transition-colors"
-              >
-                <Eye className="h-4 w-4" />
-                View Projects
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 border border-primary/30 text-primary px-6 py-3 rounded font-semibold tracking-wide hover:bg-primary/10 transition-colors"
-              >
-                <Terminal className="h-4 w-4" />
-                Contact Me
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="about" className="pt-24 pb-16">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <SectionHeading title="About Me" subtitle="Security researcher dedicated to making the digital world safer" />
 
         <GlowCard className="mb-12">
           <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
@@ -256,8 +185,8 @@ const AboutPage = () => {
         })}
       </div>
     </div>
-  </div>
-);
+  );
 };
+
 
 export default AboutPage;
