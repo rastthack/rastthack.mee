@@ -77,6 +77,7 @@ export type Database = {
       blog_posts: {
         Row: {
           content: string | null
+          cover_image: string | null
           created_at: string
           id: string
           published: boolean | null
@@ -86,6 +87,7 @@ export type Database = {
         }
         Insert: {
           content?: string | null
+          cover_image?: string | null
           created_at?: string
           id?: string
           published?: boolean | null
@@ -95,6 +97,7 @@ export type Database = {
         }
         Update: {
           content?: string | null
+          cover_image?: string | null
           created_at?: string
           id?: string
           published?: boolean | null
