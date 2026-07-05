@@ -1,29 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import GlowCard from "@/components/GlowCard";
-import { Plus, Pencil, Trash2, Save, X, Eye, EyeOff } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, X, Eye, EyeOff, Image as ImageIcon } from "lucide-react";
 
 interface BlogPost {
   id: string;
   title: string;
   content: string | null;
   tags: string | null;
+  cover_image: string | null;
   published: boolean | null;
   created_at: string;
 }
 
-const emptyPost = { title: "", content: "", tags: "", published: false };
+const emptyPost = { title: "", content: "", tags: "", cover_image: "", published: false };
 
 const AdminBlogPosts = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editing, setEditing] = useState<Partial<BlogPost> | null>(null);
   const [isNew, setIsNew] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
 
   const load = async () => {
     const { data } = await supabase.from("blog_posts").select("*").order("created_at", { ascending: false });
-    if (data) setPosts(data);
+    if (data) setPosts(data as BlogPost[]);
   };
 
   useEffect(() => { load(); }, []);
@@ -50,6 +52,28 @@ const AdminBlogPosts = () => {
     load();
   };
 
+  const insertImage = () => {
+    const url = window.prompt("Image URL (direct image link or Google Drive share link):");
+    if (!url || !editing) return;
+    const alt = window.prompt("Alt text (optional):") || "";
+    const snippet = `\n\n![${alt}](${url})\n\n`;
+    const ta = textareaRef.current;
+    const current = editing.content || "";
+    if (ta) {
+      const start = ta.selectionStart ?? current.length;
+      const end = ta.selectionEnd ?? current.length;
+      const next = current.slice(0, start) + snippet + current.slice(end);
+      setEditing({ ...editing, content: next });
+      setTimeout(() => {
+        ta.focus();
+        const pos = start + snippet.length;
+        ta.setSelectionRange(pos, pos);
+      }, 0);
+    } else {
+      setEditing({ ...editing, content: current + snippet });
+    }
+  };
+
   return (
     <div className="space-y-4">
       <button onClick={() => { setEditing(emptyPost); setIsNew(true); }} className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded text-sm font-semibold hover:bg-accent transition-colors">
@@ -60,7 +84,14 @@ const AdminBlogPosts = () => {
         <GlowCard>
           <div className="space-y-3">
             <input placeholder="Title" value={editing.title || ""} onChange={(e) => setEditing({ ...editing, title: e.target.value })} className="w-full bg-terminal border border-primary/20 rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50" />
-            <textarea placeholder="Content (Markdown supported)" value={editing.content || ""} onChange={(e) => setEditing({ ...editing, content: e.target.value })} rows={10} className="w-full bg-terminal border border-primary/20 rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 resize-none" />
+            <input placeholder="Cover image URL (optional — shown on list & top of post)" value={editing.cover_image || ""} onChange={(e) => setEditing({ ...editing, cover_image: e.target.value })} className="w-full bg-terminal border border-primary/20 rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50" />
+            <div className="flex items-center justify-between">
+              <label className="text-xs text-dim uppercase tracking-wider">Content (Markdown — use ![alt](url) for images anywhere)</label>
+              <button type="button" onClick={insertImage} className="inline-flex items-center gap-1 text-xs border border-primary/20 text-primary px-2 py-1 rounded hover:bg-primary/10 transition-colors">
+                <ImageIcon className="h-3 w-3" /> Insert image
+              </button>
+            </div>
+            <textarea ref={textareaRef} placeholder="# Heading&#10;&#10;Paragraph text...&#10;&#10;![alt](https://...)" value={editing.content || ""} onChange={(e) => setEditing({ ...editing, content: e.target.value })} rows={14} className="w-full bg-terminal border border-primary/20 rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 resize-y font-mono" />
             <input placeholder="Tags (comma separated)" value={editing.tags || ""} onChange={(e) => setEditing({ ...editing, tags: e.target.value })} className="w-full bg-terminal border border-primary/20 rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50" />
             <label className="flex items-center gap-2 text-sm text-dim">
               <input type="checkbox" checked={editing.published || false} onChange={(e) => setEditing({ ...editing, published: e.target.checked })} className="accent-primary" /> Publish immediately
