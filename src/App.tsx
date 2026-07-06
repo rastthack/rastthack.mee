@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ProjectPage from "./pages/ProjectPage";
 import SkillsPage from "./pages/SkillsPage";
 import ServicesPage from "./pages/ServicesPage";
 import CertificationsPage from "./pages/CertificationsPage";
