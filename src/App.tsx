@@ -14,6 +14,7 @@ import CertificationsPage from "./pages/CertificationsPage";
 import ExtracurricularPage from "./pages/ExtracurricularPage";
 import PapersPage from "./pages/PapersPage";
 import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/extracurricular" element={<ExtracurricularPage />} />
           <Route path="/papers" element={<PapersPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/x9k7m2/auth" element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />
           <Route path="/x9k7m2" element={<Suspense fallback={<AdminFallback />}><AdminDashboard /></Suspense>} />
