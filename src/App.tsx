@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ProjectPage from "./pages/ProjectPage";
 import SkillsPage from "./pages/SkillsPage";
 import ServicesPage from "./pages/ServicesPage";
 import CertificationsPage from "./pages/CertificationsPage";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/home" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
