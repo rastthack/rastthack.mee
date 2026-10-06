@@ -56,6 +56,7 @@ export default {
         },
         dim: "hsl(var(--text-dim))",
         terminal: "hsl(var(--terminal-bg))",
+        warning: "hsl(var(--warning))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
