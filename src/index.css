@@ -1,38 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 216 28% 7%;
-    --foreground: 152 100% 50%;
+    --background: 216 33% 3%;
+    --foreground: 213 27% 84%;
 
-    --card: 216 28% 10%;
-    --card-foreground: 152 100% 50%;
+    --card: 216 28% 7%;
+    --card-foreground: 213 27% 84%;
 
     --popover: 216 28% 10%;
-    --popover-foreground: 152 100% 50%;
+    --popover-foreground: 213 27% 84%;
 
-    --primary: 152 100% 50%;
+    --primary: 186 100% 50%;
     --primary-foreground: 216 28% 7%;
 
-    --secondary: 216 28% 14%;
-    --secondary-foreground: 152 100% 50%;
+    --secondary: 215 28% 11%;
+    --secondary-foreground: 213 27% 84%;
 
     --muted: 216 28% 14%;
-    --muted-foreground: 216 10% 55%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 120 100% 62%;
-    --accent-foreground: 216 28% 7%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 152 100% 50% / 0.15;
-    --input: 152 100% 50% / 0.15;
-    --ring: 152 100% 50%;
+    --border: 186 100% 50% / 0.2;
+    --input: 186 100% 50% / 0.2;
+    --ring: 217 91% 60%;
 
     --radius: 0.5rem;
 
@@ -51,7 +49,11 @@
     --terminal-bg: 216 28% 5%;
     --glow-green: 0 0 20px hsl(152 100% 50% / 0.5), 0 0 40px hsl(152 100% 50% / 0.2);
     --glow-bright: 0 0 20px hsl(120 100% 62% / 0.5), 0 0 40px hsl(120 100% 62% / 0.2);
-    --text-dim: 216 10% 65%;
+    --text-dim: 215 20% 65%;
+    --warning: 38 92% 50%;
+    --shadow-panel: 0 0 40px hsl(0 0% 0% / 0.5);
+    --shadow-interactive: 0 0 24px hsl(var(--accent) / 0.12);
+    --shadow-heading: 0 0 10px hsl(var(--primary) / 0.5);
   }
 }
 
@@ -63,6 +65,7 @@
   body {
     @apply bg-background text-foreground font-mono antialiased;
     font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0;
   }
 
   ::selection {
@@ -87,16 +90,16 @@
 
 @layer utilities {
   .glow-text {
-    text-shadow: 0 0 10px hsl(152 100% 50% / 0.7), 0 0 20px hsl(152 100% 50% / 0.4), 0 0 40px hsl(152 100% 50% / 0.2);
+    text-shadow: var(--shadow-heading);
   }
   .glow-text-bright {
     text-shadow: 0 0 10px hsl(120 100% 62% / 0.7), 0 0 20px hsl(120 100% 62% / 0.4);
   }
   .glow-border {
-    box-shadow: 0 0 10px hsl(152 100% 50% / 0.3), inset 0 0 10px hsl(152 100% 50% / 0.05);
+    box-shadow: var(--shadow-panel);
   }
   .glow-border-hover {
-    box-shadow: 0 0 20px hsl(152 100% 50% / 0.5), inset 0 0 15px hsl(152 100% 50% / 0.1);
+    box-shadow: var(--shadow-interactive);
   }
   .scanline {
     background: repeating-linear-gradient(
@@ -119,5 +122,13 @@
   @keyframes glow-pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
+  }
+}
+
+@layer base {
+  [class*="tracking-"] { letter-spacing: 0; }
+  h1, h2, h3, h4, p { overflow-wrap: break-word; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
   }
 }
