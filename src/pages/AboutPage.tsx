@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import SectionHeading from "@/components/SectionHeading";
 import GlowCard from "@/components/GlowCard";
@@ -56,18 +55,27 @@ const AboutPage = () => {
   const show = (key: string) => visibility[key] ?? true;
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-28 md:pt-32 pb-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <SectionHeading title="About Me" subtitle="Security researcher dedicated to making the digital world safer" />
 
 
-        <GlowCard className="mb-12">
-          <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+        <section className="mb-16 border border-primary/20 rounded-lg overflow-hidden bg-card/80 glow-border">
+          <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-primary/10 bg-secondary">
+            <div className="flex gap-1.5" aria-hidden="true">
+              <span className="w-2.5 h-2.5 rounded-full bg-destructive/50" />
+              <span className="w-2.5 h-2.5 rounded-full bg-warning/50" />
+              <span className="w-2.5 h-2.5 rounded-full bg-neon/50" />
+            </div>
+            <span className="text-[10px] text-dim truncate">RASTTHACK@LOCAL:~/ABOUT</span>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start p-6 md:p-10">
             {avatarUrl && (
               <img src={avatarUrl} alt="Profile" className="w-32 h-32 rounded-full object-cover border-2 border-primary/40 flex-shrink-0 glow-border" loading="lazy" />
             )}
-            <div className="flex-1 space-y-4">
-              <div className="space-y-4 text-dim leading-relaxed whitespace-pre-wrap">
+            <div className="flex-1 min-w-0 space-y-5">
+              <h3 className="text-sm font-bold text-primary">Raduan Ahamed <span className="text-dim font-normal">(RASTTHACK)</span></h3>
+              <div className="space-y-4 text-dim text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
                 {bio ? <p>{bio}</p> : <p className="animate-glow-pulse">Loading...</p>}
               </div>
               {socials.length > 0 && (
@@ -76,7 +84,7 @@ const AboutPage = () => {
                     const Icon = SOCIAL_ICONS[s.platform] || Globe;
                     return (
                       <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-primary/30 text-xs text-primary hover:bg-primary/10 hover:border-primary transition-colors"
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded border border-accent/30 text-xs text-foreground hover:text-primary hover:bg-accent/10 hover:border-accent transition-colors"
                         title={s.platform}>
                         <Icon className="h-3.5 w-3.5" />
                         {s.platform}
@@ -87,7 +95,7 @@ const AboutPage = () => {
               )}
             </div>
           </div>
-        </GlowCard>
+        </section>
 
         {achievements.length > 0 && (
           <>

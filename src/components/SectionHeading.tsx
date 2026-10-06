@@ -5,10 +5,10 @@ interface SectionHeadingProps {
 
 const SectionHeading = ({ title, subtitle }: SectionHeadingProps) => (
   <div className="mb-12 text-center">
-    <h2 className="text-3xl md:text-4xl font-bold tracking-wider glow-text mb-3">
+    <h2 className="text-3xl md:text-5xl font-bold text-primary glow-text mb-3 uppercase">
       {title}
     </h2>
-    {subtitle && <p className="text-dim text-sm max-w-lg mx-auto">{subtitle}</p>}
+    {subtitle && <p className="text-dim text-xs md:text-sm max-w-xl mx-auto leading-relaxed">{subtitle}</p>}
   </div>
 );
 
