@@ -97,7 +97,7 @@ const AboutPage = () => {
                 const list = achievements.filter(a => a.category === cat);
                 return (
                   <div key={cat}>
-                    <h3 className="text-accent text-sm font-bold tracking-wider mb-3 uppercase">// {cat}</h3>
+                    <h3 className="text-accent text-sm font-bold tracking-wider mb-3 uppercase">{cat}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {list.map((a) => (
                         <GlowCard key={a.id}>
