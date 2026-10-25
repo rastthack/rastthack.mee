@@ -53,7 +53,10 @@
     --warning: 38 92% 50%;
     --shadow-panel: 0 0 40px hsl(0 0% 0% / 0.5);
     --shadow-interactive: 0 0 24px hsl(var(--accent) / 0.12);
-    --shadow-heading: 0 0 10px hsl(var(--primary) / 0.5);
+    --shadow-heading: 0 0 10px hsl(186 100% 50% / 0.6), 0 0 30px hsl(186 100% 50% / 0.35), 0 0 64px hsl(186 100% 50% / 0.15);
+    --shadow-terminal: 0 0 20px hsl(186 100% 50% / 0.15), 0 0 60px hsl(186 100% 50% / 0.08), 0 20px 50px -20px hsl(0 0% 0% / 0.7);
+    --ambient-cyan: 186 100% 50%;
+    --ambient-green: 152 100% 50%;
   }
 }
 
@@ -72,10 +75,48 @@
       radial-gradient(1000px 520px at 88% 108%, hsl(217 91% 60% / 0.09), transparent 62%),
       radial-gradient(820px 420px at 6% 78%, hsl(152 100% 50% / 0.045), transparent 60%),
       radial-gradient(1400px 900px at 50% 45%, hsl(216 30% 6%), hsl(216 40% 2%)),
-      repeating-linear-gradient(0deg, transparent 0 2px, hsl(186 100% 50% / 0.012) 2px 4px),
-      repeating-linear-gradient(90deg, hsl(186 100% 50% / 0.016) 0 1px, transparent 1px 56px),
-      repeating-linear-gradient(0deg, hsl(186 100% 50% / 0.012) 0 1px, transparent 1px 56px);
+      repeating-linear-gradient(0deg, transparent 0 2px, hsl(186 100% 50% / 0.018) 2px 4px),
+      repeating-linear-gradient(90deg, hsl(186 100% 50% / 0.022) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(0deg, hsl(186 100% 50% / 0.018) 0 1px, transparent 1px 48px);
     background-attachment: fixed;
+  }
+
+  /* Animated ambient light spots drifting behind all content */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    width: 56vw;
+    height: 56vw;
+    min-width: 620px;
+    min-height: 620px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(90px);
+    opacity: 0.5;
+  }
+  body::before {
+    top: -18vw;
+    left: 8vw;
+    background: radial-gradient(circle, hsl(var(--ambient-cyan) / 0.10) 0%, transparent 62%);
+    animation: ambient-drift-a 26s ease-in-out infinite alternate;
+  }
+  body::after {
+    bottom: -20vw;
+    right: -10vw;
+    background: radial-gradient(circle, hsl(var(--ambient-green) / 0.08) 0%, transparent 62%);
+    animation: ambient-drift-b 32s ease-in-out infinite alternate;
+  }
+  @keyframes ambient-drift-a {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(9vw, 7vh) scale(1.12); }
+    100% { transform: translate(-5vw, 12vh) scale(0.95); }
+  }
+  @keyframes ambient-drift-b {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-8vw, -9vh) scale(1.08); }
+    100% { transform: translate(6vw, -5vh) scale(1.15); }
   }
 
   .nav-glass {
