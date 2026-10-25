@@ -56,11 +56,11 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen pt-28 md:pt-32 pb-20">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <div className="container mx-auto px-4 max-w-4xl neon-halo">
         <SectionHeading title="About Me" subtitle="Security researcher dedicated to making the digital world safer" />
 
 
-        <section className="mb-16 border border-primary/20 rounded-lg overflow-hidden bg-card/80 glow-border">
+        <section className="mb-16 terminal-card">
           <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-primary/10 bg-secondary">
             <div className="flex gap-1.5" aria-hidden="true">
               <span className="w-2.5 h-2.5 rounded-full bg-destructive/50" />
