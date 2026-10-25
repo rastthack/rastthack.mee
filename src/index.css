@@ -152,6 +152,66 @@
   .glow-text {
     text-shadow: var(--shadow-heading);
   }
+  .terminal-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid hsl(186 100% 50% / 0.35);
+    background: linear-gradient(180deg, hsl(216 28% 9% / 0.85), hsl(216 28% 5% / 0.9));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-terminal), inset 0 0 40px hsl(186 100% 50% / 0.03);
+    animation: terminal-pulse 7s ease-in-out infinite;
+  }
+  .terminal-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(186 100% 50% / 0.025) 2px,
+      hsl(186 100% 50% / 0.025) 4px
+    );
+  }
+  .terminal-card::before {
+    content: "";
+    position: absolute;
+    inset-x-0: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, hsl(186 100% 50% / 0.7), transparent);
+  }
+  @keyframes terminal-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(186 100% 50% / 0.15), 0 0 60px hsl(186 100% 50% / 0.08), 0 20px 50px -20px hsl(0 0% 0% / 0.7), inset 0 0 40px hsl(186 100% 50% / 0.03);
+    }
+    50% {
+      box-shadow: 0 0 26px hsl(186 100% 50% / 0.28), 0 0 80px hsl(186 100% 50% / 0.14), 0 20px 50px -20px hsl(0 0% 0% / 0.7), inset 0 0 50px hsl(186 100% 50% / 0.05);
+    }
+  }
+  .neon-halo {
+    position: relative;
+  }
+  .neon-halo::before {
+    content: "";
+    position: absolute;
+    inset: -30% -10%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(ellipse at 50% 30%, hsl(186 100% 50% / 0.07) 0%, transparent 65%);
+    animation: halo-breathe 9s ease-in-out infinite;
+  }
+  @keyframes halo-breathe {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
   .glow-text-bright {
     text-shadow: 0 0 10px hsl(120 100% 62% / 0.7), 0 0 20px hsl(120 100% 62% / 0.4);
   }
